@@ -1,0 +1,37 @@
+{
+  "name" : "Export Options",
+  "description" : "Helpers to add/remove export sizes",
+  "author" : "Jon",
+  "authorEmail" : "jon@smashedtatoes.com",
+  "homepage": "https://smashedtatoes.com",
+  "identifier" : "com.smashedtatoes.sketchexport",
+  "version" : "0.1",  
+
+  "commands" : [
+    {
+      "script" : "addAndroidSizes.cocoascript",
+      "name" : "Add Android Sizes",
+      "handlers" : {
+        "run" : "onRun"
+      },
+      "shortcut" : "control shift e",
+      "identifier" : "com.smashedtatoes.sketch.addandroidsizes"
+    },
+    {
+      "script" : "removeAllSizes.cocoascript",
+      "name" : "Remove all Export Sizes",
+      "handlers" : {
+        "run" : "onRun"
+      },
+      "shortcut" : "control shift r",
+      "identifier" : "com.smashedtatoes.sketch.removeallsizes"
+    },
+  ],
+  "menu" : {
+    "items" : [
+      "com.smashedtatoes.sketch.addandroidsizes",
+      "com.smashedtatoes.sketch.removeallsizes",
+    ],
+    "title" : "Export Options"
+  }
+}

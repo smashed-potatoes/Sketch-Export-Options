@@ -1,0 +1,26 @@
+var onRun = function(context) {
+    doc = context.document;
+
+    var selectedLayers = context.selection;
+    var selectedCount = selectedLayers.count();
+
+    // Check that at least one layer is selected
+    if (selectedCount == 0) {
+        doc.showMessage("No layers are selected.");
+        log('No layers are selected.');
+    } else {
+        // Remove all export options from each selected layer
+        for (var i = 0; i < selectedCount; i++) {
+            var layer = selectedLayers[i];
+            
+            var formats = layer.exportOptions().exportFormats();
+            while(formats.length > 0) {
+                formats[0].remove();
+            }
+            
+            // Deselect/reselect layer to refresh UI
+            layer.setIsSelected(false);
+            layer.setIsSelected(true);
+        }
+    };
+};

@@ -1,0 +1,59 @@
+var onRun = function(context) {
+    doc = context.document;
+
+    var selectedLayers = context.selection;
+    var selectedCount = selectedLayers.count();
+
+    // Define the export options to add for android
+    var androidSizes = [
+        {
+            "format": "png",
+            "scale": 1,
+            "suffix": "mdpi"
+        },
+        {
+            "format": "png",
+            "scale": 1.5,
+            "suffix": "hdpi"
+        },
+        {
+            "format": "png",
+            "scale": 2,
+            "suffix": "xhdpi"
+        },
+        {
+            "format": "png",
+            "scale": 3,
+            "suffix": "xxhdpi"
+        },
+        {
+            "format": "png",
+            "scale": 4,
+            "suffix": "xxxhdpi"
+        }
+    ]
+
+    // Check that at least one layer is selected
+    if (selectedCount == 0) {
+        doc.showMessage("No layers are selected.");
+        log('No layers are selected.');
+    } else {
+        // Add the export options to each selected layer
+        for (var i = 0; i < selectedCount; i++) {
+            var layer = selectedLayers[i];
+
+            for (var j = 0; j < androidSizes.length; j++) {
+                var size_data = androidSizes[j];
+                var size = layer.exportOptions().addExportFormat();
+                size.setFileFormat(size_data.format);
+                size.setName(size_data.suffix);
+                size.setScale(size_data.scale);
+            }
+            // Deselect/reselect layer to refresh UI
+            layer.setIsSelected(false);
+            layer.setIsSelected(true);
+        }
+    };
+
+
+};
